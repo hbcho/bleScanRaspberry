@@ -1,0 +1,15 @@
+{
+  "name": "ble-project",
+  "version": "0.0.0",
+  "description": "BLE scan project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Mateus",
+  "license": "ISC",
+  "dependencies": {
+    "noble": "^1.9.1",
+    "node-beacon-scanner": "^0.1.0"
+  }
+}
