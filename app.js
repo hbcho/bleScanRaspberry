@@ -1,16 +1,18 @@
-const Noble = require("noble");
-const BeaconScanner = require("node-beacon-scanner");
+var express = require('express'),
+app = express(),
+port = process.env.PORT || 3000,
+mongoose = require('mongoose'),
+Task = require('./models/beacon'),
+bodyParser = require('body-parser');
 
-var scanner = new BeaconScanner();
+// mongoose instance connection url connection
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://mateuspaduan:44599351Ma@ds159772.mlab.com:59772/botcare');
 
-scanner.onadvertisement = (advertisement) => {
-	var beacon = advertisement["iBeacon"];
-	beacon.rssi = advertisement["rssi"];
-	console.log(JSON.stringify(beacon, null, "   "));
-}
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-scanner.startScan().then(() => {
-	console.log("Scanning has started..");
-}).catch(error => {
-	console.error(error)
-})
+var routes = require('./routes/beaconRoutes'); //importing route
+routes(app); //register the route
+
+app.listen(port);
