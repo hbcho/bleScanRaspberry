@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var BeaconSchema = new Schema({
     
-    UUID: {
+    uuid: {
         type: String
     },
     major: {
@@ -13,7 +13,7 @@ var BeaconSchema = new Schema({
     minor: {
         type: String
     },    
-    rssi:{
+    txPower:{
         type: String
     }
 });
