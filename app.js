@@ -3,6 +3,7 @@ app = express(),
 port = process.env.PORT || 3000,
 mongoose = require('mongoose'),
 Task = require('./models/beacon'),
+User = require('./models/user'),
 bodyParser = require('body-parser');
 
 // mongoose instance connection url connection
@@ -14,5 +15,7 @@ app.use(bodyParser.json());
 
 var routes = require('./routes/beaconRoutes'); //importing route
 routes(app); //register the route
+
+console.log(port);
 
 app.listen(port);
