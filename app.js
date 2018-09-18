@@ -16,6 +16,4 @@ app.use(bodyParser.json());
 var routes = require('./routes/beaconRoutes'); //importing route
 routes(app); //register the route
 
-console.log(port);
-
 app.listen(port);

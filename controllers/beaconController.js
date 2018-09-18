@@ -1,26 +1,37 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-Beacon = mongoose.model('Beacons');
+Beacon = mongoose.model('Beacons'),
+User = mongoose.model('Users');
 
 exports.list_all_beacons = function (req, res) {
 
-    Beacon.find({}, function (err, beacon) { 
+    Beacon.find({}, function (err, beacon) {
 
-        if(err)
+        if (err)
             res.send(err);
-        res.json(beacon);    
+        res.json(beacon);
     });
 };
 
 exports.upload_beacon_data = function (req, res) {
 
-    var new_beacon = new Beacon(req.body);
+    User.find({ major: req.body.major, minor: req.body.minor }, function (err, user) {
 
-    new_beacon.save(function (err, beacon) {
+        if (err) {
+            res.send(err);
+        }
 
-        if(err)
-            res.send(error);
-        res.json(beacon);    
+        if (user.length) {
+
+            var new_beacon = new Beacon(req.body);
+
+            new_beacon.save(function (err, beacon) {
+
+                if (err)
+                    res.send(error);
+                res.json(beacon);
+            })
+        }
     })
 };
