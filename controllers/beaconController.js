@@ -25,16 +25,31 @@ exports.upload_beacon_data = function (req, res) {
 
         if (user.length) {
 
-            var new_iteration = new Iteration(user.name, req.body.major, req.body.minor, req.body.txPower);
+            Iteration.find({ major: req.body.major, minor: req.body.minor }, function (err, iteration) {
 
-            new_iteration.save(function(err, iteration){
-
-                if(err)
+                if (err) {
                     res.send(err);
-                res.json(iteration);    
+                }
+
+                if (iteration.length) {
+
+                    iteration.txPower = req.body.txPower;
+                }
+
+                else {
+
+                    var new_iteration = new Iteration(user.name, req.body.major, req.body.minor, req.body.txPower);
+
+                    new_iteration.save(function (err, iteration) {
+
+                        if (err)
+                            res.send(err);
+                        res.json(iteration);
+                    })
+                }
             })
 
-            Beacon.find({ major: req.body.major, minor: req.body.minor }, function (err, beacon) {
+            /*Beacon.find({ major: req.body.major, minor: req.body.minor }, function (err, beacon) {
 
                 if (err) {
                     res.send(err);
@@ -56,7 +71,7 @@ exports.upload_beacon_data = function (req, res) {
 
                     console.log("Update params in database");
                 }
-            })
+            })*/
         }
     })
 };
