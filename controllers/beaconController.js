@@ -25,6 +25,8 @@ exports.upload_beacon_data = function (req, res) {
 
         if (user.length) {
 
+            console.log(user);
+
             Iteration.find({ major: req.body.major, minor: req.body.minor }, function (err, iteration) {
 
                 if (err) {
@@ -33,6 +35,7 @@ exports.upload_beacon_data = function (req, res) {
 
                 if (iteration.length) {
 
+                    console.log(iteration);
                     iteration.txPower = req.body.txPower;
                 }
 
@@ -45,6 +48,7 @@ exports.upload_beacon_data = function (req, res) {
                         if (err)
                             res.send(err);
                         res.json(iteration);
+                        console.log(iteration);
                     })
                 }
             })
