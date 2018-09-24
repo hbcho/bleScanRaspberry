@@ -4,6 +4,7 @@ port = process.env.PORT || 3000,
 mongoose = require('mongoose'),
 Task = require('./models/beacon'),
 User = require('./models/user'),
+Iteration = require('./models/iteration'),
 bodyParser = require('body-parser');
 
 // mongoose instance connection url connection
