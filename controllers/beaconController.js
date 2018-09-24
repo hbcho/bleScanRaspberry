@@ -47,7 +47,17 @@ exports.upload_beacon_data = function (req, res) {
 
                 else {
 
-                    iteration.txPower = req.body.txPower;
+                    var key = { major: req.body.major, minor: req.body.minor };
+                    var updateTxPower = { $push: txPower = req.body.txPower };
+
+                    Iteration.update(key, updateTxPower, function (err, iteration) { 
+
+                        if(err){
+                            res.send(err);
+                        }
+
+                        res.send(iteration);
+                    });
                 }
             });
         }
