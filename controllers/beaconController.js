@@ -10,8 +10,8 @@ exports.list_all_beacons = function (req, res) {
     Beacon.find({}, function (err, beacon) {
 
         if (err)
-            res.send(err);
-        res.json(beacon);
+            res.status(500).send(err);
+        res.status(200).json(beacon);
     });
 };
 
@@ -20,17 +20,15 @@ exports.upload_beacon_data = function (req, res) {
     User.find({ major: req.body.major, minor: req.body.minor }, function (err, user) {
 
         if (err) {
-            res.send(err);
+            res.status(500).send(err);
         }
-
-        var userIteract = JSON.parse(JSON.stringify(user));
 
         if (user.length) {
 
             Iteration.find({ major: req.body.major, minor: req.body.minor }, function (err, iteration) {
 
                 if (err) {
-                    res.send(err);
+                    res.status(500).send(err);
                 }
 
                 if (!iteration.length) {
@@ -40,8 +38,8 @@ exports.upload_beacon_data = function (req, res) {
                     new_iteration.save(function (err, iteration) {
 
                         if (err)
-                            res.send(err);
-                        res.json(iteration);
+                            res.status(500).send(err);
+                        res.status(200).json(iteration);
                     })
                 }
 

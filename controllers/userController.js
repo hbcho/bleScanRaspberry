@@ -8,8 +8,8 @@ exports.list_all_users = function (req, res) {
     User.find({}, function (err, user) {
 
         if (err)
-            res.send(err);
-        res.json(user);
+            res.status(500).send(err);
+        res.status(200).json(user);
     });
 };
 
@@ -20,7 +20,7 @@ exports.upload_user_data = function (req, res) {
     new_user.save(function (err, user) {
 
         if (err)
-            res.send(error);
-        res.json(user);
+            res.status(500).send(err);
+        res.status(200).json(user);
     })
 };

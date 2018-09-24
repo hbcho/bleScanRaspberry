@@ -8,7 +8,7 @@ exports.list_all_iterations = function (req, res) {
     Iteration.find({}, function (err, iteration) {
 
         if (err)
-            res.send(err);
-        res.json(iteration);
+            res.status(500).send(err);
+        res.status(200).json(iteration);
     });
 };
