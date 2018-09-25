@@ -9,6 +9,7 @@ exports.list_all_users = function (req, res) {
 
         if (err)
             res.status(500).send(err);
+            
         res.status(200).json(user);
     });
 };
@@ -17,16 +18,13 @@ exports.upload_user_data = function (req, res) {
 
     User.find({ cpf: req.body.cpf }, function (err, user) {
 
-        if (err) {
-
+        if (err) 
             res.status(500).send(err);
-        }
+        
 
-        if(user.length) { //retornou um usuário da pesquisa, ou seja, já existe
-
+        if(user.length)  //retornou um usuário da pesquisa, ou seja, já existe
             res.status(500).send("CPF já está cadastrado.");
-        }
-
+        
         else {
 
             var new_user = new User(req.body);
@@ -35,6 +33,7 @@ exports.upload_user_data = function (req, res) {
 
                 if (err)
                     res.status(500).send(err);
+
                 res.status(200).json(user);
             })
         }

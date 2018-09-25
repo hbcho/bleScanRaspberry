@@ -11,6 +11,7 @@ exports.list_all_beacons = function (req, res) {
 
         if (err)
             res.status(500).send(err);
+            
         res.status(200).json(beacon);
     });
 };
@@ -19,9 +20,9 @@ exports.upload_beacon_data = function (req, res) {
 
     User.find({ major: req.body.major, minor: req.body.minor }, function (err, user) {
 
-        if (err) {
+        if (err) 
             res.status(500).send(err);
-        }
+        
 
         if (user.length) {
 
@@ -39,6 +40,7 @@ exports.upload_beacon_data = function (req, res) {
 
                         if (err)
                             res.status(500).send(err);
+
                         res.status(200).json(iteration);
                     })
                 }
@@ -50,10 +52,9 @@ exports.upload_beacon_data = function (req, res) {
 
                     Iteration.update(key, update, function (err, iteration) { 
 
-                        if(err){
+                        if(err)
                             return res.status(500).send(err);
-                        }
-
+                        
                         return res.status(200).send(iteration);
                     });
                 }
