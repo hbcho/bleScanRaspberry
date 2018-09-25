@@ -59,5 +59,10 @@ exports.upload_beacon_data = function (req, res) {
                 }
             });
         }
+
+        else {
+
+            res.status(500).send("Não há usuários cadastrados com esse beacon ID.");
+        }
     });
 };

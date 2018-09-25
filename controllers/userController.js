@@ -15,12 +15,28 @@ exports.list_all_users = function (req, res) {
 
 exports.upload_user_data = function (req, res) {
 
-    var new_user = new User(req.body);
+    User.find({ cpf: req.body.cpf }, function (err, user) {
 
-    new_user.save(function (err, user) {
+        if (err) {
 
-        if (err)
             res.status(500).send(err);
-        res.status(200).json(user);
-    })
+        }
+
+        if(user.length) { //retornou um usuário da pesquisa, ou seja, já existe
+
+            res.status(500).send("CPF já está cadastrado.");
+        }
+
+        else {
+
+            var new_user = new User(req.body);
+
+            new_user.save(function (err, user) {
+
+                if (err)
+                    res.status(500).send(err);
+                res.status(200).json(user);
+            })
+        }
+    });
 };
