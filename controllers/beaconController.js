@@ -11,7 +11,7 @@ exports.list_all_beacons = function (req, res) {
 
         if (err)
             res.status(500).send(err);
-            
+
         res.status(200).json(beacon);
     });
 };
@@ -63,7 +63,7 @@ exports.upload_beacon_data = function (req, res) {
 
         else {
 
-            res.status(500).send("Não há usuários cadastrados com esse beacon ID.");
+            res.status(500).send("Não há usuários cadastrados com esse ID de beacons.");
         }
     });
 };
